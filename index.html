@@ -69,7 +69,7 @@
   .petal-intro{position:absolute;top:-30px;z-index:101;pointer-events:none;will-change:transform}
 
   /* ---------- HERO ---------- */
-  .hero{position:relative;padding:210px 36px 70px;text-align:center;overflow:hidden}
+  .hero{position:relative;padding:210px 24px 70px;text-align:center;overflow:hidden}
   .cross{width:54px;display:block;margin:0 auto 34px;filter:drop-shadow(0 2px 3px rgba(150,110,40,.25))}
   .prayer{
     font-family:'Montserrat',sans-serif;font-style:italic;text-transform:uppercase;
@@ -85,10 +85,9 @@
     font-size:3.4rem;letter-spacing:5px;color:var(--blue);line-height:1.1;
     text-transform:uppercase;
   }
-  .child-surname{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.35rem;letter-spacing:2px;color:var(--muted);margin-top:4px}
   .people{margin-top:34px}
   .people h4{font-size:.74rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);margin-top:16px}
-  .people p{font-size:.78rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);line-height:1.5}
+  .people p{font-size:1.03rem;letter-spacing:.5px;text-transform:uppercase;color:#a8843f;font-weight:500;line-height:1.55}
   .invite-text{
     font-size:.76rem;letter-spacing:.8px;text-transform:uppercase;line-height:1.6;
     color:var(--ink);max-width:330px;margin:34px auto 0;
@@ -250,7 +249,6 @@
 
       <h1 class="script-title reveal d1">Mi Bautizo</h1>
       <div class="child-name reveal d2" data-bind="nombre"></div>
-      <div class="child-surname reveal d2" data-bind="apellidos"></div>
 
       <div class="people reveal d2">
         <h4>Mis papás</h4>
@@ -380,7 +378,6 @@
    ===================================================================== */
 const CONFIG = {
   nombre: "Leonardo David",
-  apellidos: "Costet Cuevas",
   // Fecha y hora de la MISA (se usa para la fecha mostrada y el contador)
   fecha: "2026-12-26T11:00:00-06:00",
   oracion: "Señor, hoy te presentamos a nuestro hijo con el corazón lleno de gratitud. Cuida sus pasos, ilumina su camino con tu luz y llénalo siempre de amor y paz. Acompáñanos a celebrar este día de bendición.",
@@ -391,8 +388,7 @@ const CONFIG = {
   fiesta: { hora: "1:00 PM",  lugar: "Jardín Colibrí", direccion: "C. 5 de Mayo, Cuernavaca, Morelos", mapa: "https://maps.app.goo.gl/nE8PaoPmDKhQsJvN7" },
   // Botones de WhatsApp: teléfono con lada país, solo dígitos (México = 52 + 10 dígitos)
   contactos: [
-    { nombre: "Alyx", tel: "527775654822" },
-    { nombre: "José David", tel: "527779612568" }
+    { nombre: "Pau", tel: "527775654822", boton: "Confirmar" }
   ],
   regalo: "",        // ej: "Tu presencia es el mejor regalo; si deseas obsequiarnos algo, agradeceremos tu sobre 💌". Vacío = se oculta
   sheetsUrl: "",     // URL de Google Apps Script. Vacío = se oculta el formulario y solo quedan los botones de WhatsApp
@@ -442,13 +438,13 @@ if (invitado) {
 
 // ---------- Botones de WhatsApp ----------
 CONFIG.contactos.forEach(c => {
-  let msg = `¡Hola ${c.nombre}! Confirmo mi asistencia al bautizo de ${CONFIG.nombre} 💙`;
-  if (invitado) msg = `¡Hola ${c.nombre}! Somos ${invitado} y confirmamos nuestra asistencia al bautizo de ${CONFIG.nombre} (${pases} ${pases === 1 ? 'persona' : 'personas'}) 💙`;
+  let msg = `¡Hola ${c.nombre}! Confirmo mi asistencia al bautizo de ${CONFIG.nombre}.`;
+  if (invitado) msg = `¡Hola ${c.nombre}! Somos ${invitado} y confirmamos nuestra asistencia al bautizo de ${CONFIG.nombre} (${pases} ${pases === 1 ? 'persona' : 'personas'}).`;
   const a = document.createElement('a');
   a.className = 'btn';
   a.target = '_blank'; a.rel = 'noopener';
   a.href = `https://wa.me/${c.tel}?text=${encodeURIComponent(msg)}`;
-  a.innerHTML = `Contacto ${c.nombre} <svg><use href="#handIcon"/></svg>`;
+  a.innerHTML = `${c.boton || 'Contacto ' + c.nombre} <svg><use href="#handIcon"/></svg>`;
   $('#waButtons').appendChild(a);
 });
 

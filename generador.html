@@ -82,7 +82,7 @@
     return { nombre, pases: p, url: `${BASE}?nombre=${encodeURIComponent(nombre)}&pases=${p}` };
   }
   function mensaje(g) {
-    return `¡Hola ${g.nombre}! 💙 Con mucho cariño te invitamos al bautizo de Leonardo David. Tenemos ${g.pases} ${g.pases === 1 ? 'lugar reservado' : 'lugares reservados'} para ti. Aquí está tu invitación:\n${g.url}`;
+    return `¡Hola ${g.nombre}! Con mucho cariño te invitamos al bautizo de Leonardo David. Tenemos ${g.pases} ${g.pases === 1 ? 'lugar reservado' : 'lugares reservados'} para ti. Aquí está tu invitación:\n${g.url}`;
   }
   function render() {
     $('#out').innerHTML = '';
